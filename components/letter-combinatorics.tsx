@@ -1,97 +1,91 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Shuffle } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Shuffle } from 'lucide-react';
 
 export function LetterCombinatorics({ text, compact = false }: { text: string; compact?: boolean }) {
-  const [permutations, setPermutations] = useState<string[]>([])
-  const [atbash, setAtbash] = useState<string>("")
-  const [albam, setAlbam] = useState<string>("")
+  const [permutations, setPermutations] = useState<string[]>([]);
+  const [atbash, setAtbash] = useState<string>('');
+  const [albam, setAlbam] = useState<string>('');
 
   // Hebrew alphabet for transformations
-  const hebrewAlphabet = "אבגדהוזחטיכלמנסעפצקרשת"
-  const hebrewReversed = "תשרקצפעסנמלכיטחזוהדגבא"
-  const hebrewAlbam = "לכיטחזוהדגבאתשרקצפעסנמ"
+  const hebrewAlphabet = 'אבגדהוזחטיכלמנסעפצקרשת';
+  const hebrewReversed = 'תשרקצפעסנמלכיטחזוהדגבא';
+  const hebrewAlbam = 'לכיטחזוהדגבאתשרקצפעסנמ';
 
   useEffect(() => {
     if (!text || text.length === 0) {
-      setPermutations([])
-      setAtbash("")
-      setAlbam("")
-      return
+      setPermutations([]);
+      setAtbash('');
+      setAlbam('');
+      return;
     }
 
     // Generate permutations (limited to avoid performance issues)
     if (text.length <= 4) {
       // For short strings, generate all permutations
-      const allPermutations = generatePermutations(text)
-      setPermutations(allPermutations.slice(0, 12)) // Limit to 12 permutations
+      const allPermutations = generatePermutations(text);
+      setPermutations(allPermutations.slice(0, 12)); // Limit to 12 permutations
     } else {
       // For longer strings, generate some meaningful transformations
       const transformations = [
-        text
-          .split("")
-          .reverse()
-          .join(""), // Reverse
-        text
-          .split("")
-          .sort()
-          .join(""), // Alphabetical
+        text.split('').reverse().join(''), // Reverse
+        text.split('').sort().join(''), // Alphabetical
         // Shift each character by 1
         text
-          .split("")
+          .split('')
           .map((char) => {
-            const code = char.charCodeAt(0)
-            return String.fromCharCode(code + 1)
+            const code = char.charCodeAt(0);
+            return String.fromCharCode(code + 1);
           })
-          .join(""),
-      ]
-      setPermutations(transformations)
+          .join(''),
+      ];
+      setPermutations(transformations);
     }
 
     // Generate Atbash transformation (Hebrew letter substitution cipher)
-    let atbashResult = ""
+    let atbashResult = '';
     for (const char of text) {
-      const index = hebrewAlphabet.indexOf(char)
+      const index = hebrewAlphabet.indexOf(char);
       if (index >= 0) {
-        atbashResult += hebrewReversed[index]
+        atbashResult += hebrewReversed[index];
       } else {
-        atbashResult += char
+        atbashResult += char;
       }
     }
-    setAtbash(atbashResult)
+    setAtbash(atbashResult);
 
     // Generate Albam transformation (another Hebrew substitution cipher)
-    let albamResult = ""
+    let albamResult = '';
     for (const char of text) {
-      const index = hebrewAlphabet.indexOf(char)
+      const index = hebrewAlphabet.indexOf(char);
       if (index >= 0) {
-        albamResult += hebrewAlbam[index]
+        albamResult += hebrewAlbam[index];
       } else {
-        albamResult += char
+        albamResult += char;
       }
     }
-    setAlbam(albamResult)
-  }, [text])
+    setAlbam(albamResult);
+  }, [text]);
 
   // Function to generate permutations
   const generatePermutations = (str: string): string[] => {
-    if (str.length <= 1) return [str]
+    if (str.length <= 1) return [str];
 
-    const result: string[] = []
+    const result: string[] = [];
     for (let i = 0; i < str.length; i++) {
-      const char = str[i]
-      const remainingChars = str.slice(0, i) + str.slice(i + 1)
-      const remainingPermutations = generatePermutations(remainingChars)
+      const char = str[i];
+      const remainingChars = str.slice(0, i) + str.slice(i + 1);
+      const remainingPermutations = generatePermutations(remainingChars);
 
       for (const perm of remainingPermutations) {
-        result.push(char + perm)
+        result.push(char + perm);
       }
     }
 
-    return result
-  }
+    return result;
+  };
 
   if (compact) {
     return (
@@ -148,7 +142,7 @@ export function LetterCombinatorics({ text, compact = false }: { text: string; c
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -246,6 +240,5 @@ export function LetterCombinatorics({ text, compact = false }: { text: string; c
         </div>
       )}
     </div>
-  )
+  );
 }
-

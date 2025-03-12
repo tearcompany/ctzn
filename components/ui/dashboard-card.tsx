@@ -1,24 +1,24 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { cn } from "@/lib/utils"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Expand, Minimize } from "lucide-react"
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Expand, Minimize } from 'lucide-react';
 
 interface DashboardCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string
-  description?: string
-  icon?: React.ReactNode
-  badge?: string
-  badgeVariant?: "default" | "secondary" | "outline" | "destructive"
-  footer?: React.ReactNode
-  isExpandable?: boolean
-  isLoading?: boolean
-  className?: string
-  contentClassName?: string
-  children: React.ReactNode
+  title: string;
+  description?: string;
+  icon?: React.ReactNode;
+  badge?: string;
+  badgeVariant?: 'default' | 'secondary' | 'outline' | 'destructive';
+  footer?: React.ReactNode;
+  isExpandable?: boolean;
+  isLoading?: boolean;
+  className?: string;
+  contentClassName?: string;
+  children: React.ReactNode;
 }
 
 export function DashboardCard({
@@ -26,7 +26,7 @@ export function DashboardCard({
   description,
   icon,
   badge,
-  badgeVariant = "secondary",
+  badgeVariant = 'secondary',
   footer,
   isExpandable = false,
   isLoading = false,
@@ -35,13 +35,13 @@ export function DashboardCard({
   children,
   ...props
 }: DashboardCardProps) {
-  const [isExpanded, setIsExpanded] = React.useState(false)
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <Card
       className={cn(
-        "mystic-card transition-all duration-300 overflow-hidden",
-        isExpanded ? "fixed inset-4 z-50 overflow-auto" : "relative",
+        'mystic-card transition-all duration-300 overflow-hidden',
+        isExpanded ? 'fixed inset-4 z-50 overflow-auto' : 'relative',
         className,
       )}
       {...props}
@@ -67,7 +67,7 @@ export function DashboardCard({
           )}
         </div>
       </CardHeader>
-      <CardContent className={cn("pt-0", contentClassName)}>
+      <CardContent className={cn('pt-0', contentClassName)}>
         {isLoading ? (
           <div className="flex items-center justify-center h-32">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -78,6 +78,5 @@ export function DashboardCard({
       </CardContent>
       {footer && <CardFooter className="pt-0">{footer}</CardFooter>}
     </Card>
-  )
+  );
 }
-

@@ -1,16 +1,16 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { FileText } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { FileText } from 'lucide-react';
 
 export function DataSummary({ text }: { text: string }) {
   const [summary, setSummary] = useState<{
-    characters: number
-    words: number
-    uniqueLetters: number
-    hebrewLetters: number
-    numericalValue: number
-    patterns: string[]
+    characters: number;
+    words: number;
+    uniqueLetters: number;
+    hebrewLetters: number;
+    numericalValue: number;
+    patterns: string[];
   }>({
     characters: 0,
     words: 0,
@@ -18,7 +18,7 @@ export function DataSummary({ text }: { text: string }) {
     hebrewLetters: 0,
     numericalValue: 0,
     patterns: [],
-  })
+  });
 
   useEffect(() => {
     if (!text) {
@@ -29,57 +29,57 @@ export function DataSummary({ text }: { text: string }) {
         hebrewLetters: 0,
         numericalValue: 0,
         patterns: [],
-      })
-      return
+      });
+      return;
     }
 
     // Count characters
-    const characters = text.length
+    const characters = text.length;
 
     // Count words
-    const words = text.split(/\s+/).filter(Boolean).length
+    const words = text.split(/\s+/).filter(Boolean).length;
 
     // Count unique letters
-    const uniqueLetters = new Set(text.split("")).size
+    const uniqueLetters = new Set(text.split('')).size;
 
     // Count Hebrew letters
-    const hebrewLetterRegex = /[\u0590-\u05FF]/g
-    const hebrewLetters = (text.match(hebrewLetterRegex) || []).length
+    const hebrewLetterRegex = /[\u0590-\u05FF]/g;
+    const hebrewLetters = (text.match(hebrewLetterRegex) || []).length;
 
     // Calculate numerical value
-    let numericalValue = 0
+    let numericalValue = 0;
     for (const char of text) {
-      numericalValue += char.charCodeAt(0)
+      numericalValue += char.charCodeAt(0);
     }
 
     // Detect patterns
-    const patterns: string[] = []
+    const patterns: string[] = [];
 
     // Check for palindrome
-    const normalized = text.toLowerCase().replace(/[^a-z0-9א-ת]/g, "")
-    const reversed = normalized.split("").reverse().join("")
+    const normalized = text.toLowerCase().replace(/[^a-z0-9א-ת]/g, '');
+    const reversed = normalized.split('').reverse().join('');
     if (normalized === reversed && normalized.length > 1) {
-      patterns.push("Palindrome detected")
+      patterns.push('Palindrome detected');
     }
 
     // Check for repeating sequences
-    const repeatingRegex = /(.{2,}).*\1/
+    const repeatingRegex = /(.{2,}).*\1/;
     if (repeatingRegex.test(text)) {
-      patterns.push("Repeating sequence detected")
+      patterns.push('Repeating sequence detected');
     }
 
     // Check for numerical patterns
     if (text.length % 7 === 0) {
-      patterns.push("Length divisible by 7 (completion)")
+      patterns.push('Length divisible by 7 (completion)');
     } else if (text.length % 12 === 0) {
-      patterns.push("Length divisible by 12 (governmental perfection)")
+      patterns.push('Length divisible by 12 (governmental perfection)');
     }
 
     // Check for golden ratio
-    const words1 = Math.round(words * 0.618)
-    const words2 = words - words1
+    const words1 = Math.round(words * 0.618);
+    const words2 = words - words1;
     if (Math.abs(words1 / words2 - 0.618) < 0.01) {
-      patterns.push("Word count approximates golden ratio")
+      patterns.push('Word count approximates golden ratio');
     }
 
     setSummary({
@@ -89,8 +89,8 @@ export function DataSummary({ text }: { text: string }) {
       hebrewLetters,
       numericalValue,
       patterns,
-    })
-  }, [text])
+    });
+  }, [text]);
 
   return (
     <div className="space-y-3">
@@ -145,6 +145,5 @@ export function DataSummary({ text }: { text: string }) {
         </div>
       )}
     </div>
-  )
+  );
 }
-

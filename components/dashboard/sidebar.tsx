@@ -1,12 +1,12 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { NavLink } from "@/components/ui/nav-link"
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { NavLink } from '@/components/ui/nav-link';
 import {
   LayoutDashboard,
   BarChart3,
@@ -22,27 +22,27 @@ import {
   Sparkles,
   HelpCircle,
   LogOut,
-} from "lucide-react"
+} from 'lucide-react';
 
 interface SidebarProps {
-  className?: string
+  className?: string;
 }
 
 export function Sidebar({ className }: SidebarProps) {
-  const pathname = usePathname()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div
       className={cn(
-        "flex flex-col border-r bg-card transition-all duration-300",
-        isCollapsed ? "w-[70px]" : "w-[240px]",
+        'flex flex-col border-r bg-card transition-all duration-300',
+        isCollapsed ? 'w-[70px]' : 'w-[240px]',
         className,
       )}
     >
       <div className="flex h-14 items-center px-3 border-b">
         <div
-          className={cn("flex items-center gap-2 transition-opacity", isCollapsed && "opacity-0 w-0 overflow-hidden")}
+          className={cn('flex items-center gap-2 transition-opacity', isCollapsed && 'opacity-0 w-0 overflow-hidden')}
         >
           <div className="h-7 w-7 rounded-full bg-secondary/20 flex items-center justify-center">
             <Sparkles className="h-4 w-4 text-secondary" />
@@ -52,7 +52,7 @@ export function Sidebar({ className }: SidebarProps) {
         <Button
           variant="ghost"
           size="icon"
-          className={cn("h-7 w-7 ml-auto", !isCollapsed && "rotate-180")}
+          className={cn('h-7 w-7 ml-auto', !isCollapsed && 'rotate-180')}
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -63,7 +63,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/dashboard"
             icon={<LayoutDashboard className="h-4 w-4" />}
-            isActive={pathname === "/dashboard"}
+            isActive={pathname === '/dashboard'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Dashboard"
           >
@@ -72,7 +72,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/analysis"
             icon={<BarChart3 className="h-4 w-4" />}
-            isActive={pathname === "/analysis"}
+            isActive={pathname === '/analysis'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Analysis"
           >
@@ -81,7 +81,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/patterns"
             icon={<Compass className="h-4 w-4" />}
-            isActive={pathname === "/patterns"}
+            isActive={pathname === '/patterns'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Patterns"
           >
@@ -90,7 +90,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/timeline"
             icon={<Clock className="h-4 w-4" />}
-            isActive={pathname === "/timeline"}
+            isActive={pathname === '/timeline'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Timeline"
           >
@@ -99,7 +99,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/history"
             icon={<History className="h-4 w-4" />}
-            isActive={pathname === "/history"}
+            isActive={pathname === '/history'}
             isSidebarCollapsed={isCollapsed}
             tooltip="History"
           >
@@ -111,8 +111,8 @@ export function Sidebar({ className }: SidebarProps) {
 
         <div
           className={cn(
-            "text-xs font-medium text-muted-foreground mb-2 transition-opacity",
-            isCollapsed && "opacity-0 h-0 overflow-hidden",
+            'text-xs font-medium text-muted-foreground mb-2 transition-opacity',
+            isCollapsed && 'opacity-0 h-0 overflow-hidden',
           )}
         >
           Tools
@@ -121,7 +121,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/tools/gematria"
             icon={<Calculator className="h-4 w-4" />}
-            isActive={pathname === "/tools/gematria"}
+            isActive={pathname === '/tools/gematria'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Gematria"
           >
@@ -130,7 +130,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/tools/letters"
             icon={<BookOpen className="h-4 w-4" />}
-            isActive={pathname === "/tools/letters"}
+            isActive={pathname === '/tools/letters'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Letters"
           >
@@ -139,7 +139,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/tools/combinations"
             icon={<Layers className="h-4 w-4" />}
-            isActive={pathname === "/tools/combinations"}
+            isActive={pathname === '/tools/combinations'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Combinations"
           >
@@ -148,7 +148,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/tools/pi"
             icon={<CircleDot className="h-4 w-4" />}
-            isActive={pathname === "/tools/pi"}
+            isActive={pathname === '/tools/pi'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Pi Relation"
           >
@@ -162,7 +162,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/settings"
             icon={<Settings className="h-4 w-4" />}
-            isActive={pathname === "/settings"}
+            isActive={pathname === '/settings'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Settings"
           >
@@ -171,7 +171,7 @@ export function Sidebar({ className }: SidebarProps) {
           <NavLink
             href="/help"
             icon={<HelpCircle className="h-4 w-4" />}
-            isActive={pathname === "/help"}
+            isActive={pathname === '/help'}
             isSidebarCollapsed={isCollapsed}
             tooltip="Help & Documentation"
           >
@@ -182,10 +182,9 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="p-3 border-t">
         <Button variant="ghost" className="w-full justify-start gap-2 text-muted-foreground">
           <LogOut className="h-4 w-4" />
-          <span className={cn("transition-opacity", isCollapsed && "opacity-0 w-0 overflow-hidden")}>Log out</span>
+          <span className={cn('transition-opacity', isCollapsed && 'opacity-0 w-0 overflow-hidden')}>Log out</span>
         </Button>
       </div>
     </div>
-  )
+  );
 }
-

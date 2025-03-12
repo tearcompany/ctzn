@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight } from 'lucide-react';
 
 // Hebrew letter to gematria value mapping
 const hebrewGematria = {
@@ -33,82 +33,82 @@ const hebrewGematria = {
   ן: 50,
   ף: 80,
   ץ: 90, // Final forms
-}
+};
 
 // Significant gematria values and their meanings
 const significantValues = {
-  1: "Unity, Beginning, God",
-  7: "Completion, Perfection, Rest",
-  8: "New Beginning, Resurrection",
-  10: "Divine Order, Completeness",
-  13: "Love, Unity, Oneness",
-  18: "Life (חי)",
-  26: "YHWH (יהוה)",
-  40: "Testing, Trials, Preparation",
-  70: "Divine Judgment, Nations",
-  72: "Divine Name (שם)",
-  90: "Righteous Judgment",
-  100: "Divine Election, Promise",
-  248: "Abraham (אברהם), Mercy",
-  314: "Shaddai (שדי), Pi (π)",
-  613: "Commandments (תרי״ג)",
-}
+  1: 'Unity, Beginning, God',
+  7: 'Completion, Perfection, Rest',
+  8: 'New Beginning, Resurrection',
+  10: 'Divine Order, Completeness',
+  13: 'Love, Unity, Oneness',
+  18: 'Life (חי)',
+  26: 'YHWH (יהוה)',
+  40: 'Testing, Trials, Preparation',
+  70: 'Divine Judgment, Nations',
+  72: 'Divine Name (שם)',
+  90: 'Righteous Judgment',
+  100: 'Divine Election, Promise',
+  248: 'Abraham (אברהם), Mercy',
+  314: 'Shaddai (שדי), Pi (π)',
+  613: 'Commandments (תרי״ג)',
+};
 
 // Words with the same gematria value
 const gematriaConnections = {
-  13: ["אהבה (love)", "אחד (one)"],
-  26: ["יהוה (YHWH)", "כבוד (glory)"],
-  86: ["אלהים (Elohim)", "הטבע (nature)"],
-  358: ["משיח (Messiah)", "נחש (serpent)"],
-}
+  13: ['אהבה (love)', 'אחד (one)'],
+  26: ['יהוה (YHWH)', 'כבוד (glory)'],
+  86: ['אלהים (Elohim)', 'הטבע (nature)'],
+  358: ['משיח (Messiah)', 'נחש (serpent)'],
+};
 
 export function GematriaCalculator({ text, compact = false }: { text: string; compact?: boolean }) {
-  const [gematriaValue, setGematriaValue] = useState(0)
-  const [letterValues, setLetterValues] = useState<{ letter: string; value: number }[]>([])
-  const [connections, setConnections] = useState<string[]>([])
-  const [significance, setSignificance] = useState<string>("")
+  const [gematriaValue, setGematriaValue] = useState(0);
+  const [letterValues, setLetterValues] = useState<{ letter: string; value: number }[]>([]);
+  const [connections, setConnections] = useState<string[]>([]);
+  const [significance, setSignificance] = useState<string>('');
 
   useEffect(() => {
     if (!text) {
-      setGematriaValue(0)
-      setLetterValues([])
-      setConnections([])
-      setSignificance("")
-      return
+      setGematriaValue(0);
+      setLetterValues([]);
+      setConnections([]);
+      setSignificance('');
+      return;
     }
 
-    let total = 0
-    const values: { letter: string; value: number }[] = []
+    let total = 0;
+    const values: { letter: string; value: number }[] = [];
 
     // Calculate gematria
     for (const char of text) {
       if (hebrewGematria[char]) {
-        total += hebrewGematria[char]
-        values.push({ letter: char, value: hebrewGematria[char] })
+        total += hebrewGematria[char];
+        values.push({ letter: char, value: hebrewGematria[char] });
       }
     }
 
-    setGematriaValue(total)
-    setLetterValues(values)
+    setGematriaValue(total);
+    setLetterValues(values);
 
     // Find connections
-    setConnections(gematriaConnections[total] || [])
+    setConnections(gematriaConnections[total] || []);
 
     // Find significance
-    setSignificance(significantValues[total] || "")
+    setSignificance(significantValues[total] || '');
 
     // If no exact match, find closest significant values
     if (!significantValues[total]) {
-      const significantNums = Object.keys(significantValues).map(Number)
+      const significantNums = Object.keys(significantValues).map(Number);
       const closest = significantNums.reduce((prev, curr) =>
         Math.abs(curr - total) < Math.abs(prev - total) ? curr : prev,
-      )
+      );
 
       if (Math.abs(closest - total) < 10) {
-        setSignificance(`Near ${closest}: ${significantValues[closest]}`)
+        setSignificance(`Near ${closest}: ${significantValues[closest]}`);
       }
     }
-  }, [text])
+  }, [text]);
 
   if (compact) {
     return (
@@ -164,7 +164,7 @@ export function GematriaCalculator({ text, compact = false }: { text: string; co
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -217,6 +217,5 @@ export function GematriaCalculator({ text, compact = false }: { text: string; co
         </div>
       )}
     </div>
-  )
+  );
 }
-

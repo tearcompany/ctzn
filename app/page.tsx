@@ -1,4 +1,4 @@
-import { KabbalahDashboard } from "@/components/kabbalah-dashboard";
+import { KabbalahDashboard } from '@/components/kabbalah-dashboard';
 
 export default function Home() {
   return (

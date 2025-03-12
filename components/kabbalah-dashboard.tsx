@@ -1,18 +1,18 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { HebrewLetterGrid } from "@/components/hebrew-letter-grid"
-import { GematriaCalculator } from "@/components/gematria-calculator"
-import { PatternVisualizer } from "@/components/pattern-visualizer"
-import { NumericalAnalysis } from "@/components/numerical-analysis"
-import { BiblicalSymbols } from "@/components/biblical-symbols"
-import { LetterCombinatorics } from "@/components/letter-combinatorics"
-import { PiCircleVisualizer } from "@/components/pi-circle-visualizer"
-import { TimelineVisualizer } from "@/components/timeline-visualizer"
-import { DataSummary } from "@/components/data-summary"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { HebrewLetterGrid } from '@/components/hebrew-letter-grid';
+import { GematriaCalculator } from '@/components/gematria-calculator';
+import { PatternVisualizer } from '@/components/pattern-visualizer';
+import { NumericalAnalysis } from '@/components/numerical-analysis';
+import { BiblicalSymbols } from '@/components/biblical-symbols';
+import { LetterCombinatorics } from '@/components/letter-combinatorics';
+import { PiCircleVisualizer } from '@/components/pi-circle-visualizer';
+import { TimelineVisualizer } from '@/components/timeline-visualizer';
+import { DataSummary } from '@/components/data-summary';
 import {
   SidebarProvider,
   Sidebar,
@@ -26,7 +26,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from '@/components/ui/sidebar';
 import {
   BookOpen,
   Calculator,
@@ -50,23 +50,23 @@ import {
   ChevronDown,
   ChevronUp,
   X,
-} from "lucide-react"
-import { QuickHelp } from "@/components/quick-help"
+} from 'lucide-react';
+import { QuickHelp } from '@/components/quick-help';
 
 export function KabbalahDashboard() {
-  const [inputText, setInputText] = useState("")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [activeTab, setActiveTab] = useState("dashboard")
-  const [isFullscreen, setIsFullscreen] = useState(false)
-  const [recentSearches, setRecentSearches] = useState<string[]>([])
+  const [inputText, setInputText] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [savedPatterns, setSavedPatterns] = useState<{ name: string; text: string }[]>([
-    { name: "Creation Pattern", text: "בראשית" },
-    { name: "Divine Name", text: "יהוה" },
-    { name: "Messiah", text: "משיח" },
-  ])
-  const [previewText, setPreviewText] = useState("")
-  const [showPreview, setShowPreview] = useState(false)
-  const [recentAnalyses, setRecentAnalyses] = useState<{ text: string; timestamp: number }[]>([])
+    { name: 'Creation Pattern', text: 'בראשית' },
+    { name: 'Divine Name', text: 'יהוה' },
+    { name: 'Messiah', text: 'משיח' },
+  ]);
+  const [previewText, setPreviewText] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
+  const [recentAnalyses, setRecentAnalyses] = useState<{ text: string; timestamp: number }[]>([]);
   const [toolsExpanded, setToolsExpanded] = useState<{ [key: string]: boolean }>({
     gematria: true,
     letters: true,
@@ -74,57 +74,57 @@ export function KabbalahDashboard() {
     numerical: true,
     biblical: true,
     pi: true,
-  })
+  });
 
   const handleSearch = () => {
-    if (!inputText.trim()) return
+    if (!inputText.trim()) return;
 
-    setSearchQuery(inputText)
-    setShowPreview(false)
+    setSearchQuery(inputText);
+    setShowPreview(false);
 
     // Add to recent searches if not already there
     if (!recentSearches.includes(inputText)) {
-      setRecentSearches((prev) => [inputText, ...prev].slice(0, 5))
+      setRecentSearches((prev) => [inputText, ...prev].slice(0, 5));
     }
 
     // Add to recent analyses with timestamp
-    setRecentAnalyses((prev) => [{ text: inputText, timestamp: Date.now() }, ...prev].slice(0, 10))
-  }
+    setRecentAnalyses((prev) => [{ text: inputText, timestamp: Date.now() }, ...prev].slice(0, 10));
+  };
 
   const handleSavePattern = () => {
-    if (!searchQuery.trim()) return
+    if (!searchQuery.trim()) return;
 
-    const patternName = prompt("Enter a name for this pattern:")
+    const patternName = prompt('Enter a name for this pattern:');
     if (patternName) {
-      setSavedPatterns((prev) => [...prev, { name: patternName, text: searchQuery }])
+      setSavedPatterns((prev) => [...prev, { name: patternName, text: searchQuery }]);
     }
-  }
+  };
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch((err) => {
-        console.error(`Error attempting to enable fullscreen: ${err.message}`)
-      })
-      setIsFullscreen(true)
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+      setIsFullscreen(true);
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen()
-        setIsFullscreen(false)
+        document.exitFullscreen();
+        setIsFullscreen(false);
       }
     }
-  }
+  };
 
   const handleQuickPreview = (text: string) => {
-    setPreviewText(text)
-    setShowPreview(true)
-  }
+    setPreviewText(text);
+    setShowPreview(true);
+  };
 
   const toggleTool = (tool: string) => {
     setToolsExpanded((prev) => ({
       ...prev,
       [tool]: !prev[tool],
-    }))
-  }
+    }));
+  };
 
   return (
     <SidebarProvider>
@@ -143,31 +143,31 @@ export function KabbalahDashboard() {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive={activeTab === "dashboard"} onClick={() => setActiveTab("dashboard")}>
+                    <SidebarMenuButton isActive={activeTab === 'dashboard'} onClick={() => setActiveTab('dashboard')}>
                       <Home className="h-4 w-4" />
                       <span>Dashboard</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive={activeTab === "analysis"} onClick={() => setActiveTab("analysis")}>
+                    <SidebarMenuButton isActive={activeTab === 'analysis'} onClick={() => setActiveTab('analysis')}>
                       <BarChart3 className="h-4 w-4" />
                       <span>Analiza</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive={activeTab === "patterns"} onClick={() => setActiveTab("patterns")}>
+                    <SidebarMenuButton isActive={activeTab === 'patterns'} onClick={() => setActiveTab('patterns')}>
                       <Compass className="h-4 w-4" />
                       <span>Eksploracja Wzorców</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive={activeTab === "timeline"} onClick={() => setActiveTab("timeline")}>
+                    <SidebarMenuButton isActive={activeTab === 'timeline'} onClick={() => setActiveTab('timeline')}>
                       <Timeline className="h-4 w-4" />
                       <span>Oś czasu</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive={activeTab === "history"} onClick={() => setActiveTab("history")}>
+                    <SidebarMenuButton isActive={activeTab === 'history'} onClick={() => setActiveTab('history')}>
                       <History className="h-4 w-4" />
                       <span>Historia analiz</span>
                     </SidebarMenuButton>
@@ -181,31 +181,31 @@ export function KabbalahDashboard() {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => toggleTool("gematria")}>
+                    <SidebarMenuButton onClick={() => toggleTool('gematria')}>
                       <Calculator className="h-4 w-4" />
                       <span>Gematria</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => toggleTool("letters")}>
+                    <SidebarMenuButton onClick={() => toggleTool('letters')}>
                       <Layers className="h-4 w-4" />
                       <span>Ceruf</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => toggleTool("patterns")}>
+                    <SidebarMenuButton onClick={() => toggleTool('patterns')}>
                       <CircleDot className="h-4 w-4" />
                       <span>Pi Relation</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => toggleTool("numerical")}>
+                    <SidebarMenuButton onClick={() => toggleTool('numerical')}>
                       <BookOpen className="h-4 w-4" />
                       <span>Letter Analysis</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={() => toggleTool("biblical")}>
+                    <SidebarMenuButton onClick={() => toggleTool('biblical')}>
                       <Clock className="h-4 w-4" />
                       <span>Biblical Symbolism</span>
                     </SidebarMenuButton>
@@ -222,8 +222,8 @@ export function KabbalahDashboard() {
                     <SidebarMenuItem key={index}>
                       <SidebarMenuButton
                         onClick={() => {
-                          setInputText(pattern.text)
-                          setSearchQuery(pattern.text)
+                          setInputText(pattern.text);
+                          setSearchQuery(pattern.text);
                         }}
                       >
                         <Sparkles className="h-4 w-4" />
@@ -291,9 +291,9 @@ export function KabbalahDashboard() {
               <div className="flex justify-end mt-4">
                 <Button
                   onClick={() => {
-                    setSearchQuery(previewText)
-                    setShowPreview(false)
-                    setRecentAnalyses((prev) => [{ text: previewText, timestamp: Date.now() }, ...prev].slice(0, 10))
+                    setSearchQuery(previewText);
+                    setShowPreview(false);
+                    setRecentAnalyses((prev) => [{ text: previewText, timestamp: Date.now() }, ...prev].slice(0, 10));
                   }}
                 >
                   Pełna analiza
@@ -317,8 +317,8 @@ export function KabbalahDashboard() {
                   onChange={(e) => setInputText(e.target.value)}
                   className="pl-8 bg-background border-input"
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSearch()
-                    else if (e.key === "Tab" && e.ctrlKey) handleQuickPreview(inputText)
+                    if (e.key === 'Enter') handleSearch();
+                    else if (e.key === 'Tab' && e.ctrlKey) handleQuickPreview(inputText);
                   }}
                 />
               </div>
@@ -343,7 +343,7 @@ export function KabbalahDashboard() {
 
           {/* Main content area */}
           <div className="flex-1 overflow-auto p-4">
-            {activeTab === "dashboard" && (
+            {activeTab === 'dashboard' && (
               <div className="grid grid-cols-12 gap-4">
                 {/* Left column - 5/12 width */}
                 <div className="col-span-5 space-y-4">
@@ -359,7 +359,7 @@ export function KabbalahDashboard() {
                           variant="ghost"
                           size="sm"
                           className="h-6 w-6 p-0"
-                          onClick={() => toggleTool("gematria")}
+                          onClick={() => toggleTool('gematria')}
                         >
                           {toolsExpanded.gematria ? (
                             <ChevronUp className="h-4 w-4" />
@@ -383,7 +383,7 @@ export function KabbalahDashboard() {
                           <Layers className="h-4 w-4 text-primary" />
                           <span>Kombinatoryka Liter</span>
                         </div>
-                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => toggleTool("letters")}>
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => toggleTool('letters')}>
                           {toolsExpanded.letters ? (
                             <ChevronUp className="h-4 w-4" />
                           ) : (
@@ -406,7 +406,7 @@ export function KabbalahDashboard() {
                           <CircleDot className="h-4 w-4 text-primary" />
                           <span>Relacja Pi</span>
                         </div>
-                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => toggleTool("pi")}>
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => toggleTool('pi')}>
                           {toolsExpanded.pi ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                         </Button>
                       </CardTitle>
@@ -433,7 +433,7 @@ export function KabbalahDashboard() {
                           variant="ghost"
                           size="sm"
                           className="h-6 w-6 p-0"
-                          onClick={() => toggleTool("patterns")}
+                          onClick={() => toggleTool('patterns')}
                         >
                           {toolsExpanded.patterns ? (
                             <ChevronUp className="h-4 w-4" />
@@ -461,7 +461,7 @@ export function KabbalahDashboard() {
                           variant="ghost"
                           size="sm"
                           className="h-6 w-6 p-0"
-                          onClick={() => toggleTool("numerical")}
+                          onClick={() => toggleTool('numerical')}
                         >
                           {toolsExpanded.numerical ? (
                             <ChevronUp className="h-4 w-4" />
@@ -489,7 +489,7 @@ export function KabbalahDashboard() {
                           variant="ghost"
                           size="sm"
                           className="h-6 w-6 p-0"
-                          onClick={() => toggleTool("biblical")}
+                          onClick={() => toggleTool('biblical')}
                         >
                           {toolsExpanded.biblical ? (
                             <ChevronUp className="h-4 w-4" />
@@ -585,7 +585,7 @@ export function KabbalahDashboard() {
               </div>
             )}
 
-            {activeTab === "analysis" && (
+            {activeTab === 'analysis' && (
               <div className="grid grid-cols-2 gap-4">
                 <Card className="bg-card border border-border shadow-sm">
                   <CardHeader>
@@ -637,7 +637,7 @@ export function KabbalahDashboard() {
               </div>
             )}
 
-            {activeTab === "patterns" && (
+            {activeTab === 'patterns' && (
               <div className="grid grid-cols-2 gap-4">
                 <Card className="bg-card border border-border shadow-sm relative overflow-hidden">
                   <div className="divine-light"></div>
@@ -667,7 +667,7 @@ export function KabbalahDashboard() {
               </div>
             )}
 
-            {activeTab === "timeline" && (
+            {activeTab === 'timeline' && (
               <Card className="bg-card border border-border shadow-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -681,7 +681,7 @@ export function KabbalahDashboard() {
               </Card>
             )}
 
-            {activeTab === "history" && (
+            {activeTab === 'history' && (
               <div className="p-4 space-y-4">
                 <Card className="bg-card border border-border shadow-sm">
                   <CardHeader>
@@ -719,9 +719,9 @@ export function KabbalahDashboard() {
                                 variant="default"
                                 size="sm"
                                 onClick={() => {
-                                  setInputText(item.text)
-                                  setSearchQuery(item.text)
-                                  setActiveTab("dashboard")
+                                  setInputText(item.text);
+                                  setSearchQuery(item.text);
+                                  setActiveTab('dashboard');
                                 }}
                               >
                                 <Search className="h-3 w-3 mr-1" />
@@ -745,6 +745,5 @@ export function KabbalahDashboard() {
         </div>
       </div>
     </SidebarProvider>
-  )
+  );
 }
-

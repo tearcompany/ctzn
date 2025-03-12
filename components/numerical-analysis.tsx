@@ -1,118 +1,118 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Badge } from "@/components/ui/badge"
-import { CircleDot } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { CircleDot } from 'lucide-react';
 
 // Perfect numbers
-const perfectNumbers = [6, 28, 496, 8128]
+const perfectNumbers = [6, 28, 496, 8128];
 
 // Amicable number pairs
 const amicableNumbers = [
   [220, 284],
   [1184, 1210],
   [2620, 2924],
-]
+];
 
 // Biblical significant numbers
 const biblicalNumbers = {
-  1: "Unity, God",
-  2: "Division, Witness",
-  3: "Divine Perfection, Trinity",
-  4: "Creation, World",
+  1: 'Unity, God',
+  2: 'Division, Witness',
+  3: 'Divine Perfection, Trinity',
+  4: 'Creation, World',
   5: "Grace, God's goodness",
-  6: "Man, Human weakness",
-  7: "Completeness, Perfection",
-  8: "New beginnings, Resurrection",
-  9: "Divine completeness, Finality",
-  10: "Law, Responsibility",
-  12: "Governmental perfection",
-  13: "Rebellion, Apostasy",
-  40: "Testing, Trial, Probation",
-  50: "Jubilee, Freedom",
-  70: "Nations, Judgment",
-}
+  6: 'Man, Human weakness',
+  7: 'Completeness, Perfection',
+  8: 'New beginnings, Resurrection',
+  9: 'Divine completeness, Finality',
+  10: 'Law, Responsibility',
+  12: 'Governmental perfection',
+  13: 'Rebellion, Apostasy',
+  40: 'Testing, Trial, Probation',
+  50: 'Jubilee, Freedom',
+  70: 'Nations, Judgment',
+};
 
 export function NumericalAnalysis({ text, compact = false }: { text: string; compact?: boolean }) {
-  const [numbers, setNumbers] = useState<number[]>([])
-  const [perfectFound, setPerfectFound] = useState<number[]>([])
-  const [amicableFound, setAmicableFound] = useState<number[][]>([])
-  const [biblicalFound, setBiblicalFound] = useState<{ num: number; meaning: string }[]>([])
-  const [piRelation, setPiRelation] = useState<string>("")
+  const [numbers, setNumbers] = useState<number[]>([]);
+  const [perfectFound, setPerfectFound] = useState<number[]>([]);
+  const [amicableFound, setAmicableFound] = useState<number[][]>([]);
+  const [biblicalFound, setBiblicalFound] = useState<{ num: number; meaning: string }[]>([]);
+  const [piRelation, setPiRelation] = useState<string>('');
 
   useEffect(() => {
     if (!text) {
-      setNumbers([])
-      setPerfectFound([])
-      setAmicableFound([])
-      setBiblicalFound([])
-      setPiRelation("")
-      return
+      setNumbers([]);
+      setPerfectFound([]);
+      setAmicableFound([]);
+      setBiblicalFound([]);
+      setPiRelation('');
+      return;
     }
 
     // Extract numbers from text (gematria values, word counts, etc.)
-    const extractedNumbers: number[] = []
+    const extractedNumbers: number[] = [];
 
     // Simple extraction of numeric values
-    const numericMatches = text.match(/\d+/g)
+    const numericMatches = text.match(/\d+/g);
     if (numericMatches) {
       numericMatches.forEach((match) => {
-        extractedNumbers.push(Number.parseInt(match))
-      })
+        extractedNumbers.push(Number.parseInt(match));
+      });
     }
 
     // Calculate gematria value of the entire text
-    let gematriaTotal = 0
+    let gematriaTotal = 0;
     for (const char of text) {
-      const charCode = char.charCodeAt(0)
-      gematriaTotal += charCode
+      const charCode = char.charCodeAt(0);
+      gematriaTotal += charCode;
     }
-    extractedNumbers.push(gematriaTotal)
+    extractedNumbers.push(gematriaTotal);
 
     // Add length of text
-    extractedNumbers.push(text.length)
+    extractedNumbers.push(text.length);
 
     // Add word count
-    const wordCount = text.split(/\s+/).filter(Boolean).length
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
     if (wordCount > 0) {
-      extractedNumbers.push(wordCount)
+      extractedNumbers.push(wordCount);
     }
 
-    setNumbers(extractedNumbers)
+    setNumbers(extractedNumbers);
 
     // Check for perfect numbers
-    const perfect = extractedNumbers.filter((num) => perfectNumbers.includes(num))
-    setPerfectFound(perfect)
+    const perfect = extractedNumbers.filter((num) => perfectNumbers.includes(num));
+    setPerfectFound(perfect);
 
     // Check for amicable numbers
-    const amicable: number[][] = []
+    const amicable: number[][] = [];
     extractedNumbers.forEach((num) => {
       amicableNumbers.forEach((pair) => {
         if (pair.includes(num)) {
-          amicable.push(pair)
+          amicable.push(pair);
         }
-      })
-    })
-    setAmicableFound(amicable)
+      });
+    });
+    setAmicableFound(amicable);
 
     // Check for biblical significant numbers
-    const biblical: { num: number; meaning: string }[] = []
+    const biblical: { num: number; meaning: string }[] = [];
     extractedNumbers.forEach((num) => {
       if (biblicalNumbers[num]) {
-        biblical.push({ num, meaning: biblicalNumbers[num] })
+        biblical.push({ num, meaning: biblicalNumbers[num] });
       }
-    })
-    setBiblicalFound(biblical)
+    });
+    setBiblicalFound(biblical);
 
     // Check for Pi relation
     if (extractedNumbers.some((num) => Math.abs(num - 314) < 5)) {
-      setPiRelation("Value close to Pi (314) detected - connection to divine harmony")
+      setPiRelation('Value close to Pi (314) detected - connection to divine harmony');
     } else if (extractedNumbers.some((num) => num % 22 === 0 && num % 7 === 0)) {
-      setPiRelation("Value divisible by both 22 and 7 (approximation of Pi) - cosmic balance")
+      setPiRelation('Value divisible by both 22 and 7 (approximation of Pi) - cosmic balance');
     } else {
-      setPiRelation("")
+      setPiRelation('');
     }
-  }, [text])
+  }, [text]);
 
   if (compact) {
     return (
@@ -200,7 +200,7 @@ export function NumericalAnalysis({ text, compact = false }: { text: string; com
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -305,6 +305,5 @@ export function NumericalAnalysis({ text, compact = false }: { text: string; com
         </div>
       )}
     </div>
-  )
+  );
 }
-
