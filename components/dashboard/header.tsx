@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, Bell, User, Sun, Moon, Maximize, Minimize, Eye } from "lucide-react"
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Search, Bell, User, Sun, Moon, Maximize, Minimize, Eye } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,66 +12,66 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu';
 
 interface HeaderProps {
-  onSearch?: (query: string) => void
-  onQuickPreview?: (query: string) => void
+  onSearch?: (query: string) => void;
+  onQuickPreview?: (query: string) => void;
 }
 
 export function Header({ onSearch, onQuickPreview }: HeaderProps) {
-  const pathname = usePathname()
-  const [searchQuery, setSearchQuery] = useState("")
-  const [isFullscreen, setIsFullscreen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const pathname = usePathname();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const getPageTitle = () => {
     switch (pathname) {
-      case "/dashboard":
-        return "Dashboard"
-      case "/analysis":
-        return "Analysis"
-      case "/patterns":
-        return "Pattern Explorer"
-      case "/timeline":
-        return "Time Axis"
-      case "/history":
-        return "Analysis History"
+      case '/dashboard':
+        return 'Dashboard';
+      case '/analysis':
+        return 'Analysis';
+      case '/patterns':
+        return 'Pattern Explorer';
+      case '/timeline':
+        return 'Time Axis';
+      case '/history':
+        return 'Analysis History';
       default:
-        return "Kabbalistic Pattern Analysis"
+        return 'Kabbalistic Pattern Analysis';
     }
-  }
+  };
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch((err) => {
-        console.error(`Error attempting to enable fullscreen: ${err.message}`)
-      })
-      setIsFullscreen(true)
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+      setIsFullscreen(true);
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen()
-        setIsFullscreen(false)
+        document.exitFullscreen();
+        setIsFullscreen(false);
       }
     }
-  }
+  };
 
   const toggleDarkMode = () => {
-    document.documentElement.classList.toggle("dark")
-    setIsDarkMode(!isDarkMode)
-  }
+    document.documentElement.classList.toggle('dark');
+    setIsDarkMode(!isDarkMode);
+  };
 
   const handleSearch = () => {
     if (onSearch && searchQuery) {
-      onSearch(searchQuery)
+      onSearch(searchQuery);
     }
-  }
+  };
 
   const handleQuickPreview = () => {
     if (onQuickPreview && searchQuery) {
-      onQuickPreview(searchQuery)
+      onQuickPreview(searchQuery);
     }
-  }
+  };
 
   return (
     <header className="h-14 border-b bg-card flex items-center justify-between px-4">
@@ -85,7 +85,7 @@ export function Header({ onSearch, onQuickPreview }: HeaderProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-8 bg-background"
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
         </div>
         <Button className="bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSearch}>
@@ -102,9 +102,6 @@ export function Header({ onSearch, onQuickPreview }: HeaderProps) {
         </Button>
         <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
           {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
-        </Button>
-        <Button variant="ghost" size="icon" className="relative">
-          />}
         </Button>
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
@@ -128,6 +125,5 @@ export function Header({ onSearch, onQuickPreview }: HeaderProps) {
         </DropdownMenu>
       </div>
     </header>
-  )
+  );
 }
-

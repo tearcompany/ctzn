@@ -87,7 +87,7 @@
 }
 
 .mystic-card::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -107,13 +107,13 @@
 }
 
 .cosmic-bg::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/patterns/cosmic-dots.svg");
+  background-image: url('/patterns/cosmic-dots.svg');
   background-size: cover;
   opacity: 0.03;
   pointer-events: none;
@@ -125,7 +125,7 @@
 }
 
 .glow-effect::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -197,7 +197,7 @@
 }
 
 .pattern-visualizer::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -235,11 +235,12 @@
 }
 
 .card-hover-effect {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card-hover-effect:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
-

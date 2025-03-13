@@ -1,74 +1,74 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, CircleDot } from "lucide-react"
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Calendar, CircleDot } from 'lucide-react';
 
 // Biblical time cycles
 const biblicalCycles = {
-  7: "Week cycle (Creation)",
-  12: "Month cycle (Tribes, Apostles)",
+  7: 'Week cycle (Creation)',
+  12: 'Month cycle (Tribes, Apostles)',
   40: "Testing period (Flood, Wilderness, Jesus' fast)",
-  50: "Jubilee cycle (Freedom)",
-  70: "Generational cycle (Exile)",
-  490: "Prophetic cycle (70 weeks of Daniel)",
-}
+  50: 'Jubilee cycle (Freedom)',
+  70: 'Generational cycle (Exile)',
+  490: 'Prophetic cycle (70 weeks of Daniel)',
+};
 
 // Biblical symbols
 const biblicalSymbols = {
-  tree: "Life, Knowledge",
-  water: "Purification, Life",
-  fire: "Presence of God, Judgment",
-  bread: "Sustenance, Body of Christ",
-  wine: "Covenant, Blood of Christ",
-  oil: "Anointing, Holy Spirit",
-  lamb: "Sacrifice, Christ",
-  lion: "Strength, Tribe of Judah",
-  dove: "Holy Spirit, Peace",
-  serpent: "Temptation, Evil",
-  star: "Divine guidance, Messiah",
-  crown: "Authority, Victory",
-  gate: "Access, Opportunity",
-  key: "Authority, Access",
-  sword: "Word of God, Justice",
-  light: "Truth, Guidance",
-  darkness: "Evil, Ignorance",
+  tree: 'Life, Knowledge',
+  water: 'Purification, Life',
+  fire: 'Presence of God, Judgment',
+  bread: 'Sustenance, Body of Christ',
+  wine: 'Covenant, Blood of Christ',
+  oil: 'Anointing, Holy Spirit',
+  lamb: 'Sacrifice, Christ',
+  lion: 'Strength, Tribe of Judah',
+  dove: 'Holy Spirit, Peace',
+  serpent: 'Temptation, Evil',
+  star: 'Divine guidance, Messiah',
+  crown: 'Authority, Victory',
+  gate: 'Access, Opportunity',
+  key: 'Authority, Access',
+  sword: 'Word of God, Justice',
+  light: 'Truth, Guidance',
+  darkness: 'Evil, Ignorance',
   mountain: "God's presence, Challenge",
-  desert: "Testing, Isolation",
-  sea: "Chaos, Nations",
-  river: "Life, Abundance",
-}
+  desert: 'Testing, Isolation',
+  sea: 'Chaos, Nations',
+  river: 'Life, Abundance',
+};
 
 export function BiblicalSymbols({ text, compact = false }: { text: string; compact?: boolean }) {
-  const [cycles, setCycles] = useState<{ cycle: number; meaning: string }[]>([])
-  const [symbols, setSymbols] = useState<{ symbol: string; meaning: string }[]>([])
+  const [cycles, setCycles] = useState<{ cycle: number; meaning: string }[]>([]);
+  const [symbols, setSymbols] = useState<{ symbol: string; meaning: string }[]>([]);
 
   useEffect(() => {
     if (!text) {
-      setCycles([])
-      setSymbols([])
-      return
+      setCycles([]);
+      setSymbols([]);
+      return;
     }
 
     // Find biblical cycles
-    const foundCycles: { cycle: number; meaning: string }[] = []
+    const foundCycles: { cycle: number; meaning: string }[] = [];
     Object.entries(biblicalCycles).forEach(([cycle, meaning]) => {
-      const cycleNum = Number.parseInt(cycle)
+      const cycleNum = Number.parseInt(cycle);
       if (text.includes(cycle) || text.length === cycleNum || text.split(/\s+/).length === cycleNum) {
-        foundCycles.push({ cycle: cycleNum, meaning })
+        foundCycles.push({ cycle: cycleNum, meaning });
       }
-    })
-    setCycles(foundCycles)
+    });
+    setCycles(foundCycles);
 
     // Find biblical symbols
-    const foundSymbols: { symbol: string; meaning: string }[] = []
+    const foundSymbols: { symbol: string; meaning: string }[] = [];
     Object.entries(biblicalSymbols).forEach(([symbol, meaning]) => {
       if (text.toLowerCase().includes(symbol.toLowerCase())) {
-        foundSymbols.push({ symbol, meaning })
+        foundSymbols.push({ symbol, meaning });
       }
-    })
-    setSymbols(foundSymbols)
-  }, [text])
+    });
+    setSymbols(foundSymbols);
+  }, [text]);
 
   if (compact) {
     return (
@@ -88,7 +88,7 @@ export function BiblicalSymbols({ text, compact = false }: { text: string; compa
                       variant="secondary"
                       className="bg-primary/10 text-primary border-primary/20 text-xs"
                     >
-                      {item.cycle}: {item.meaning.split(" ")[0]}
+                      {item.cycle}: {item.meaning.split(' ')[0]}
                     </Badge>
                   ))}
                   {cycles.length > 2 && (
@@ -131,7 +131,7 @@ export function BiblicalSymbols({ text, compact = false }: { text: string; compa
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -186,6 +186,5 @@ export function BiblicalSymbols({ text, compact = false }: { text: string; compa
         </div>
       )}
     </div>
-  )
+  );
 }
-
