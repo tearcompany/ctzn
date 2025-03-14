@@ -1,9 +1,13 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Hash, Calculator, Infinity, Link } from "lucide-react";
 
+import { KabbalisticCalculator } from "@/components/kabbalistic-calculator";
+
 export default function NumbersAnalysisSection() {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="space-y-4">
+      <KabbalisticCalculator />
+      <div className="grid grid-cols-2 gap-4">
       <Card className="bg-card border border-border shadow-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
