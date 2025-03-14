@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+.mystical-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%,
+    hsl(var(--secondary)) 50%,
+    hsl(var(--accent)) 100%
+  );
+}
+
+.divine-glow {
+  box-shadow: 0 0 20px rgba(241, 186, 44, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.divine-glow:hover {
+  box-shadow: 0 0 30px rgba(241, 186, 44, 0.4);
+}
+
 @layer base {
   :root {
     --background: 220 25% 98%;

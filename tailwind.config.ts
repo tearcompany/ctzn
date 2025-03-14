@@ -20,6 +20,25 @@ const config = {
     },
     extend: {
       colors: {
+        divine: {
+          gold: '#F1BA2C',
+          silver: '#E5E7EB',
+          mystic: '#6D28D9'
+        }
+      },
+      animation: {
+        'divine-pulse': 'pulse 3s infinite',
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        }
+      },
+    },
+    extend: {
+      colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
